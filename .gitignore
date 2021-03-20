@@ -1,0 +1,7 @@
+# gitignore
+*.log
+node_modules
+.DS_Store
+dist/*
+yarn.lock
+package-lock.json

@@ -1,0 +1,37 @@
+{
+  "name": "qs",
+  "version": "1.0.0",
+  "description": "Declarative pure functional querystring parser and manager",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phdog/qs.git"
+  },
+  "keywords": [
+    "querystring",
+    "qs",
+    "query",
+    "url",
+    "parse",
+    "stringify"
+  ],
+  "author": "Max Kachanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phdog/qs/issues"
+  },
+  "homepage": "https://github.com/phdog/qs#readme",
+  "dependencies": {
+    "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
