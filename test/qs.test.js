@@ -1,5 +1,5 @@
 import identity from 'ramda/es/identity';
-import qs from '../lib';
+import {qs} from '../lib';
 
 const qParams1 = {page: '2', limit: '100', status: 'qa,done', asc: 'priority', ['created_at.lt']: '2021-03-10', ['created_at.gt']: '2021-03-01'};
 const qString1 = '?page=2&limit=100&status=qa,done&asc=priority&created_at.lt=2021-03-10&created_at.gt=2021-03-01';
@@ -80,22 +80,22 @@ test('qs private GET_KEY', () => {
 
 test('qs ADD', () => {
   expect(
-    qs(identity, '?status=qa&asc=priority').add('status', 'done')
+    qs(() => '?status=qa&asc=priority', identity).add('status', 'done')
   ).toBe(
     '?status=done,qa&asc=priority'
   );
   expect(
-    qs(identity, '?asc=priority').add('status', 'done')
+    qs(() => '?asc=priority', identity).add('status', 'done')
   ).toBe(
     '?asc=priority&status=done'
   );
   expect(
-    qs(identity, '').add('status', 'done')
+    qs(() => '', identity).add('status', 'done')
   ).toBe(
     '?status=done'
   );
   expect(
-    qs(identity, '?status=%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5').add('status', 'готово')
+    qs(() => '?status=%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5', identity).add('status', 'готово')
   ).toBe(
     '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE,%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5'
   );
@@ -104,17 +104,17 @@ test('qs ADD', () => {
 
 test('qs DROP', () => {
   expect(
-    qs(identity, '?status=qa,done,in_progress&asc=priority').drop('status', 'done')
+    qs(() => '?status=qa,done,in_progress&asc=priority', identity).drop('status', 'done')
   ).toBe(
     '?status=qa,in_progress&asc=priority'
   );
   expect(
-    qs(identity, '?status=done&asc=priority').drop('status', 'done')
+    qs(() => '?status=done&asc=priority', identity).drop('status', 'done')
   ).toBe(
     '?asc=priority'
   );
   expect(
-    qs(identity, '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE%2C%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5&asc=priority').drop('status', 'готово')
+    qs(() => '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE%2C%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5&asc=priority', identity).drop('status', 'готово')
   ).toBe(
     '?status=%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5&asc=priority'
   );
@@ -123,17 +123,17 @@ test('qs DROP', () => {
 
 test('qs SET', () => {
   expect(
-    qs(identity, '?status=qa,done,in_progress&asc=priority').set('status', 'done')
+    qs(() => '?status=qa,done,in_progress&asc=priority', identity).set('status', 'done')
   ).toBe(
     '?status=done&asc=priority'
   );
   expect(
-    qs(identity, '?status=qa,done,in_progress&asc=priority').set('status', '')
+    qs(() => '?status=qa,done,in_progress&asc=priority', identity).set('status', '')
   ).toBe(
     '?asc=priority'
   );
   expect(
-    qs(identity, '?status=qa,done,in_progress&asc=priority').set('status', 'готово')
+    qs(() => '?status=qa,done,in_progress&asc=priority', identity).set('status', 'готово')
   ).toBe(
     '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE&asc=priority'
   );
@@ -141,22 +141,22 @@ test('qs SET', () => {
 
 test('qs GET_KEY', () => {
   expect(
-    qs(null, '?status=qa,done,in_progress&asc=priority').getKey('status')
+    qs(() => '?status=qa,done,in_progress&asc=priority').getKey('status')
   ).toBe(
     'qa,done,in_progress'
   );
   expect(
-    qs(null, '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE&asc=priority').getKey('status')
+    qs(() => '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE&asc=priority').getKey('status')
   ).toBe(
     'готово'
   );
   expect(
-    qs(null, '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE%2C%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5&asc=priority').getKey('status')
+    qs(() => '?status=%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE%2C%D0%BA_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B5&asc=priority').getKey('status')
   ).toBe(
     'готово,к_проверке'
   );
   expect(
-    qs(null, '?asc=priority').getKey('status')
+    qs(() => '?asc=priority').getKey('status')
   ).toBe(
     ''
   );

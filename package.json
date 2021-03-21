@@ -1,5 +1,5 @@
 {
-  "name": "qs",
+  "name": "ramda-qs",
   "version": "1.0.0",
   "description": "Declarative pure functional querystring parser and manager",
   "main": "index.js",
@@ -8,11 +8,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phdog/qs.git"
+    "url": "git+https://github.com/phdog/ramda-qs.git"
   },
   "keywords": [
     "querystring",
@@ -25,9 +25,9 @@
   "author": "Max Kachanov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/phdog/qs/issues"
+    "url": "https://github.com/phdog/ramda-qs/issues"
   },
-  "homepage": "https://github.com/phdog/qs#readme",
+  "homepage": "https://github.com/phdog/ramda-qs#readme",
   "dependencies": {
     "ramda": "^0.27.1"
   },
